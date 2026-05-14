@@ -17,6 +17,7 @@ public class Q2 : MonoBehaviour
     [SerializeField]
     private Button button = null;
 
+    // 防止动画打断button idle导致跳帧，在这里只控制button的父节点进行缩放等运动
     [SerializeField]
     private Animation parentAni = null;
 

@@ -79,6 +79,15 @@ public class Q1 : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        foreach (Transform child in gridRootNode)
+        {
+            Destroy(child.gameObject);
+        }
+        ImageList = null;
+    }
+
     public void OnGenerateBtnClick()
     {
         // TODO: 请在此处开始作答
@@ -94,13 +103,6 @@ public class Q1 : MonoBehaviour
             Debug.Log("hat 输入有误");
             return;
         }
-
-        // 清除旧数据
-        // TODO:后续优化思路，提前实例化好格子与位置，后续只需要设置颜色，防止反复实例化和销毁造成巨大的GC压力
-        //foreach (Transform child in gridRootNode)
-        //{
-        //    Destroy(child.gameObject);
-        //}
 
         int[,] gridColors = new int[10, 10];
 
@@ -151,19 +153,6 @@ public class Q1 : MonoBehaviour
                     // 根据权重进行随机选择
                     selectedColorIndex = GetWeightedRandomIndex(weights);
                 }
-
-                // 记录当前点颜色
-                gridColors[n, m] = selectedColorIndex;
-
-                //// 实例化 UI 格子并设置属性
-                //GameObject newItem = Instantiate(gridItemPrefab, gridRootNode);
-
-                //// 设置格子的颜色
-                //Image itemImage = newItem.GetComponent<Image>();
-                //if (itemImage != null)
-                //{
-                //    ImageList[n, m].color = COLORS[selectedColorIndex];
-                //}
 
                 ImageList[n, m].color = COLORS[selectedColorIndex];
             }
